@@ -15,6 +15,7 @@ export const environment = {
     'mongodb://mongouser:mongopass@localhost:27017/split_local?authSource=admin'
   ),
   PORT: 8080,
+  DISCORD_TOKEN: getEnvironment('DISCORD_TOKEN'),
 };
 
 environment.LOCAL = !environment.GIT_SHA;
