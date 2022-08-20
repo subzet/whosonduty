@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 export function getEnvironment<T = string>(key: string, defaultValue?: T): T {
   return (process.env[key] ?? defaultValue ?? '') as T;
 }
@@ -16,6 +19,7 @@ export const environment = {
   ),
   PORT: 8080,
   DISCORD_TOKEN: getEnvironment('DISCORD_TOKEN'),
+  DISCORD_CLIENT_ID: getEnvironment('DISCORD_APPLICATION_ID'),
 };
 
 environment.LOCAL = !environment.GIT_SHA;
