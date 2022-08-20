@@ -18,5 +18,5 @@ export const messageHandler = async (message: Message) => {
     message.channelId
   );
 
-  message.reply(`This message belongs to ${responsible}`);
+  message.reply(`This message belongs to <@${responsible}>`);
 };
