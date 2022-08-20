@@ -1,21 +1,10 @@
-import {
-  Client,
-  GatewayIntentBits,
-  Interaction,
-  REST,
-  Routes,
-} from 'discord.js';
+import { Client, GatewayIntentBits, REST, Routes } from 'discord.js';
 
 import { environment } from '../util';
-import { greet, ping, truth } from './controller';
+import { ping, rotation } from './command';
+import { messageHandler } from './message';
 
-export interface DiscordCommand {
-  name: string;
-  description: string;
-  handler: (interaction: Interaction) => Promise<void>;
-}
-
-const commands = [ping, greet, truth];
+const commands = [ping, rotation];
 
 const rest = new REST({ version: '10' }).setToken(environment.DISCORD_TOKEN);
 
@@ -39,16 +28,18 @@ const rest = new REST({ version: '10' }).setToken(environment.DISCORD_TOKEN);
   }
 })();
 
-export const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+export const client = new Client({
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
+});
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user?.tag}!`);
 });
 
 client.on('interactionCreate', async (interaction) => {
-  console.log(interaction);
-
-  if (!interaction.isChatInputCommand()) return;
+  if (!interaction.isChatInputCommand()) {
+    return;
+  }
 
   const command = commands.find(
     (command) => command.name === interaction.commandName
@@ -57,6 +48,10 @@ client.on('interactionCreate', async (interaction) => {
   if (command) {
     await command.handler(interaction);
   }
+});
+
+client.on('messageCreate', async (message) => {
+  await messageHandler(message);
 });
 
 client.login(environment.DISCORD_TOKEN);

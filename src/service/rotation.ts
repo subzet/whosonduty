@@ -98,7 +98,7 @@ class RotationService {
   public create(
     data: RotationData,
     startDate = dayjs().startOf('day').toISOString()
-  ): Promise<RotationData> {
+  ): Promise<Rotation> {
     this.isValidRotation(data);
 
     this.isValidStartDate(startDate, data.length);
