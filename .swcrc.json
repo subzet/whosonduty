@@ -1,0 +1,25 @@
+{
+  "env": {
+    "targets": {
+      "node": "16"
+    }
+  },
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "decorators": true
+    },
+    "transform": {
+      "legacyDecorator": true,
+      "decoratorMetadata": true
+    },
+    "target": "es2021",
+    "keepClassNames": true,
+    "externalHelpers": true
+  },
+  "module": {
+    "type": "commonjs"
+  },
+  "minify": true,
+  "sourceMaps": "inline"
+}

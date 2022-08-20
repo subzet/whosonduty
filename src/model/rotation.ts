@@ -7,13 +7,11 @@ import { MongoBase } from './base';
 })
 export class RotationDuty {
   @prop()
-  userId!: string;
+  userId!: string; //Points to user on duty
   @prop()
-  startDate!: Date;
+  startDate!: Date; //Start of rotation
   @prop()
-  endDate!: Date;
-  @prop()
-  length!: string;
+  endDate!: Date; //End of rotation
 }
 
 export class Rotation extends MongoBase {
@@ -27,7 +25,7 @@ export class Rotation extends MongoBase {
   responsible!: string[]; // [Manu, Ari, Marcos]
 
   @prop()
-  duty!: RotationDuty[];
+  duty?: RotationDuty[];
   // [Last RotationDuty, Current Rotation Duty , Next RotationDuty] o [Current Rotation Duty, Next Rotation Duty]
 }
 
