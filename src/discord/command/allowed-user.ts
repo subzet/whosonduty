@@ -34,8 +34,6 @@ const getPromptsAnswers = async (
 
     const message = input.first();
 
-    console.log(`MESSAGE`, message);
-
     if (!message) {
       continue;
     }
