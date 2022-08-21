@@ -1,6 +1,6 @@
 import { Interaction, Message, TextBasedChannel } from 'discord.js';
 
-import { discordChannelService, discordUserService } from '../../service';
+import { discordUserService } from '../../service';
 import { Errors, ServerError } from '../../util';
 import { DiscordCommand } from '../types';
 
@@ -46,9 +46,9 @@ const getPromptsAnswers = async (
   return result;
 };
 
-export const rotation: DiscordCommand = {
-  name: 'rotation',
-  description: 'Creates a channel rotation',
+export const allowedUser: DiscordCommand = {
+  name: 'allowed-user',
+  description: 'Sets allowed users to create rotation',
   handler: async (interaction: Interaction) => {
     if (!interaction.isCommand()) {
       return;
@@ -58,12 +58,7 @@ export const rotation: DiscordCommand = {
       return;
     }
 
-    const isAllowed = await discordUserService.isAllowed(interaction.user.id);
-
-    const isAuthorized =
-      interaction.guild?.ownerId === interaction.user.id || isAllowed;
-
-    if (!isAuthorized) {
+    if (interaction.guild?.ownerId !== interaction.user.id) {
       await interaction?.reply({
         content: `You re not a guild owner or an allowed member to perform this action`,
         ephemeral: true,
@@ -71,18 +66,8 @@ export const rotation: DiscordCommand = {
       return;
     }
 
-    const channels = await discordChannelService.getChannels();
-
-    if (channels.includes(interaction.channelId)) {
-      await interaction?.reply({
-        content: 'Channel already has a rotation',
-        ephemeral: true,
-      });
-      return;
-    }
-
     await interaction.reply(
-      `Bip bup... creating your rotation. Please answer a few questions:`
+      `Great! Let's update who is allowed to create rotations`
     );
 
     const filter = (message: Message) => {
@@ -90,32 +75,22 @@ export const rotation: DiscordCommand = {
     };
 
     try {
-      const [participants, length, startDate] = await getPromptsAnswers(
+      const [users] = await getPromptsAnswers(
         interaction.channel,
-        [
-          'Tag rotation participants',
-          'Write rotation length as **<number> days**',
-          'Write start date in YYYY-MM-DD',
-        ],
+        ['Tag users allowed to create rotations'],
         filter,
         60_000
       );
 
-      await isValidParticipantsAnswer(participants);
+      isValidParticipantsAnswer(users);
 
-      const participantsIds = await getUsersFromMessage(participants);
+      const usersIds = getUsersFromMessage(users);
 
-      await discordChannelService.findOrCreateChannelRotation(
-        interaction.channelId,
-        interaction.guild?.channels.cache.find(
-          (channel) => channel.id === interaction.channelId
-        )?.name as string,
-        participantsIds,
-        startDate?.content,
-        length?.content
+      await Promise.all(
+        usersIds.map((userId) => discordUserService.createUser(userId))
       );
 
-      await interaction.channel.send(`Channel Rotation created succesfully`);
+      await interaction.channel?.send(`Users allowed updated!`);
     } catch (error) {
       if (error instanceof ServerError) {
         await interaction.channel?.send(

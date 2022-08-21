@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Rotation test Should create rotation with participants 1`] = `
+exports[`Rotation test Should create rotation with custom date 1`] = `
 Object {
   "__v": 0,
-  "_id": "6300ec762ccc9950076e3966",
-  "createdAt": 2022-08-20T14:15:18.426Z,
+  "_id": "6302ab599bad01ee7f552366",
+  "createdAt": 2022-08-21T22:02:01.402Z,
   "duty": Array [
     Object {
       "endDate": 2022-08-25T03:00:00.000Z,
@@ -24,24 +24,52 @@ Object {
     "2",
     "3",
   ],
-  "updatedAt": 2022-08-20T14:15:18.425Z,
+  "updatedAt": 2022-08-21T22:02:01.401Z,
+}
+`;
+
+exports[`Rotation test Should create rotation with participants 1`] = `
+Object {
+  "__v": 0,
+  "_id": "6302ab599bad01ee7f55235e",
+  "createdAt": 2022-08-21T22:02:01.189Z,
+  "duty": Array [
+    Object {
+      "endDate": 2022-08-26T03:00:00.000Z,
+      "startDate": 2022-08-21T03:00:00.000Z,
+      "userId": "1",
+    },
+    Object {
+      "endDate": 2022-08-31T03:00:00.000Z,
+      "startDate": 2022-08-26T03:00:00.000Z,
+      "userId": "2",
+    },
+  ],
+  "length": "5 days",
+  "name": "Support",
+  "responsible": Array [
+    "1",
+    "2",
+    "3",
+  ],
+  "updatedAt": 2022-08-21T22:02:01.188Z,
 }
 `;
 
 exports[`Rotation test Should rotate participants 1`] = `
 Object {
   "__v": 0,
-  "_id": "6300ec762ccc9950076e3968",
-  "createdAt": 2022-08-20T14:15:18.501Z,
+  "_id": "6302ab599bad01ee7f552360",
+  "createdAt": 2022-08-21T22:02:01.312Z,
   "duty": Array [
     Object {
-      "endDate": 2022-08-19T14:15:18.495Z,
-      "startDate": 2022-08-14T14:15:18.495Z,
+      "endDate": 2022-08-20T22:02:01.307Z,
+      "startDate": 2022-08-15T22:02:01.307Z,
       "userId": "1",
     },
     Object {
-      "endDate": 2022-08-24T14:15:18.495Z,
-      "startDate": 2022-08-19T14:15:18.495Z,
+      "endDate": 2022-08-25T22:02:01.307Z,
+      "startDate": 2022-08-20T22:02:01.307Z,
       "userId": "2",
     },
   ],
@@ -52,24 +80,24 @@ Object {
     "2",
     "3",
   ],
-  "updatedAt": 2022-08-20T14:15:18.501Z,
+  "updatedAt": 2022-08-21T22:02:01.312Z,
 }
 `;
 
 exports[`Rotation test Should rotate participants 2`] = `
 Object {
   "__v": 0,
-  "_id": "6300ec762ccc9950076e3968",
-  "createdAt": 2022-08-20T14:15:18.501Z,
+  "_id": "6302ab599bad01ee7f552360",
+  "createdAt": 2022-08-21T22:02:01.312Z,
   "duty": Array [
     Object {
-      "endDate": 2022-08-24T14:15:18.495Z,
-      "startDate": 2022-08-19T14:15:18.495Z,
+      "endDate": 2022-08-25T22:02:01.307Z,
+      "startDate": 2022-08-20T22:02:01.307Z,
       "userId": "2",
     },
     Object {
-      "endDate": 2022-08-29T14:15:18.495Z,
-      "startDate": 2022-08-24T14:15:18.495Z,
+      "endDate": 2022-08-30T22:02:01.307Z,
+      "startDate": 2022-08-25T22:02:01.307Z,
       "userId": "3",
     },
   ],
@@ -80,24 +108,24 @@ Object {
     "2",
     "3",
   ],
-  "updatedAt": 2022-08-20T14:15:18.556Z,
+  "updatedAt": 2022-08-21T22:02:01.357Z,
 }
 `;
 
 exports[`Rotation test Should rotate participants and begin again 1`] = `
 Object {
   "__v": 0,
-  "_id": "6300ec762ccc9950076e396e",
-  "createdAt": 2022-08-20T14:15:18.608Z,
+  "_id": "6302ab599bad01ee7f552368",
+  "createdAt": 2022-08-21T22:02:01.416Z,
   "duty": Array [
     Object {
-      "endDate": 2022-08-19T14:15:18.603Z,
-      "startDate": 2022-08-14T14:15:18.603Z,
+      "endDate": 2022-08-20T22:02:01.412Z,
+      "startDate": 2022-08-15T22:02:01.412Z,
       "userId": "3",
     },
     Object {
-      "endDate": 2022-08-24T14:15:18.603Z,
-      "startDate": 2022-08-19T14:15:18.603Z,
+      "endDate": 2022-08-25T22:02:01.412Z,
+      "startDate": 2022-08-20T22:02:01.412Z,
       "userId": "1",
     },
   ],
@@ -108,24 +136,24 @@ Object {
     "2",
     "3",
   ],
-  "updatedAt": 2022-08-20T14:15:18.607Z,
+  "updatedAt": 2022-08-21T22:02:01.415Z,
 }
 `;
 
 exports[`Rotation test Should rotate participants and begin again 2`] = `
 Object {
   "__v": 0,
-  "_id": "6300ec762ccc9950076e396e",
-  "createdAt": 2022-08-20T14:15:18.608Z,
+  "_id": "6302ab599bad01ee7f552368",
+  "createdAt": 2022-08-21T22:02:01.416Z,
   "duty": Array [
     Object {
-      "endDate": 2022-08-24T14:15:18.603Z,
-      "startDate": 2022-08-19T14:15:18.603Z,
+      "endDate": 2022-08-25T22:02:01.412Z,
+      "startDate": 2022-08-20T22:02:01.412Z,
       "userId": "1",
     },
     Object {
-      "endDate": 2022-08-29T14:15:18.603Z,
-      "startDate": 2022-08-24T14:15:18.603Z,
+      "endDate": 2022-08-30T22:02:01.412Z,
+      "startDate": 2022-08-25T22:02:01.412Z,
       "userId": "2",
     },
   ],
@@ -136,6 +164,6 @@ Object {
     "2",
     "3",
   ],
-  "updatedAt": 2022-08-20T14:15:18.635Z,
+  "updatedAt": 2022-08-21T22:02:01.435Z,
 }
 `;

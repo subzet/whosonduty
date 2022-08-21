@@ -1,7 +1,6 @@
-import { User, UserData } from '../../model';
+import { DiscordUser, DiscordUserData } from '../../model';
 
-export interface IUserRepository {
-  findOrCreate: (data: UserData) => Promise<User>;
-  findByEmail: (email: string) => Promise<User | void>;
-  findById: (id: string) => Promise<User | void>;
+export interface IDiscordUserRepository {
+  findOrCreate: (data: DiscordUserData) => Promise<DiscordUser>;
+  findById: (id: string) => Promise<DiscordUser | void>;
 }

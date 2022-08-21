@@ -1,15 +1,15 @@
-import { User, UserData, UserModel } from '../../model';
-import { IUserRepository } from './types';
+import { DiscordUser, DiscordUserData, DiscordUserModel } from '../../model';
+import { IDiscordUserRepository } from './types';
 
-export class MongoUserRepository implements IUserRepository {
-  private create = async (data: UserData): Promise<User> => {
-    const user = await UserModel.create({ ...data });
+export class MongoUserRepository implements IDiscordUserRepository {
+  private create = async (data: DiscordUserData): Promise<DiscordUser> => {
+    const user = await DiscordUserModel.create({ ...data });
 
     return user.toObject();
   };
 
-  public findOrCreate = async (data: UserData): Promise<User> => {
-    const user = await this.findByEmail(data.email);
+  public findOrCreate = async (data: DiscordUserData): Promise<DiscordUser> => {
+    const user = await this.findById(data.userId);
 
     if (!user) {
       return this.create(data);
@@ -18,18 +18,8 @@ export class MongoUserRepository implements IUserRepository {
     return user;
   };
 
-  public findByEmail = async (email: string): Promise<User | void> => {
-    const user = await UserModel.findOne({ email });
-
-    if (!user) {
-      return;
-    }
-
-    return user.toObject();
-  };
-
-  public findById = async (id: string): Promise<User | void> => {
-    const user = await UserModel.findById(id);
+  public findById = async (id: string): Promise<DiscordUser | void> => {
+    const user = await DiscordUserModel.findOne({ userId: id });
 
     if (!user) {
       return;

@@ -83,6 +83,18 @@ describe('Rotation test', () => {
     expect(mockRotation.duty?.[1].userId).toBe(rotation.duty?.[0].userId);
   });
 
+  it('Should create rotation with custom date', async () => {
+    const data: RotationData = {
+      name: 'Support',
+      length: '5 days',
+      responsible: ['1', '2', '3'],
+    };
+
+    const rotation = await rotationService.create(data, '2022-08-20');
+
+    expect(rotation).toMatchSnapshot();
+  });
+
   it('Should rotate participants and begin again', async () => {
     const mockRotation = await createMockRotation(
       3,

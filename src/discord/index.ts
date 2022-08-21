@@ -1,10 +1,10 @@
 import { Client, GatewayIntentBits, REST, Routes } from 'discord.js';
 
 import { environment } from '../util';
-import { ping, rotation } from './command';
-import { messageHandler } from './message';
+import { allowedUser, ping, rotation } from './command';
+import { rotationMessageHandler } from './message';
 
-const commands = [ping, rotation];
+const commands = [ping, rotation, allowedUser];
 
 const rest = new REST({ version: '10' }).setToken(environment.DISCORD_TOKEN);
 
@@ -29,7 +29,11 @@ const rest = new REST({ version: '10' }).setToken(environment.DISCORD_TOKEN);
 })();
 
 export const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
 client.on('ready', () => {
@@ -51,7 +55,7 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 client.on('messageCreate', async (message) => {
-  await messageHandler(message);
+  await rotationMessageHandler(message);
 });
 
 client.login(environment.DISCORD_TOKEN);

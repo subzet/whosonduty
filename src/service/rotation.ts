@@ -7,13 +7,13 @@ import { Errors } from '../util';
 
 class RotationService {
   private isValidRotation = (data: RotationData) => {
-    // const lengthRegex = /\d* days/; //5 days
+    const lengthRegex = /\d* days/;
 
-    // if (lengthRegex.test(data.length)) {
-    //   throw Errors.invalidOperation(
-    //     'Invalid rotation length. Try `<number> days`'
-    //   );
-    // }
+    if (!lengthRegex.test(data.length)) {
+      throw Errors.invalidOperation(
+        'Invalid rotation length. Try `<number> days`'
+      );
+    }
 
     if (data.responsible.length === 0) {
       throw Errors.invalidOperation(

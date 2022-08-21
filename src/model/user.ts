@@ -2,17 +2,11 @@ import { getModelForClass, prop } from '@typegoose/typegoose';
 
 import { MongoBase } from './base';
 
-export class User extends MongoBase {
+export class DiscordUser extends MongoBase {
   @prop()
-  name!: string;
-
-  @prop()
-  email!: string;
-
-  @prop()
-  active!: boolean;
+  userId!: string;
 }
 
-export const UserModel = getModelForClass(User);
+export const DiscordUserModel = getModelForClass(DiscordUser);
 
-export type UserData = Omit<User, keyof MongoBase>;
+export type DiscordUserData = Omit<DiscordUser, keyof MongoBase>;
