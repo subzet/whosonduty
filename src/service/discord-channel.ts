@@ -51,6 +51,8 @@ class DiscordChannelService {
       return;
     }
 
+    await rotationService.rotate(channelRotation?.rotationId);
+
     const rotation = await rotationService.findById(
       channelRotation?.rotationId
     );

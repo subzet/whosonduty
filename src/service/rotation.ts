@@ -120,9 +120,7 @@ class RotationService {
     }
 
     if (!this.shouldRotate(rotation)) {
-      throw Errors.invalidOperation(
-        'Rotation can not be rotated because current rotation has not finished yet.'
-      );
+      return;
     }
 
     const currentRotationDuty = rotation.duty?.[0];
