@@ -1,3 +1,4 @@
+import { DiscordChannelRotation } from '../model';
 import { mongoDiscordChannelRepository } from '../repository/discord-channel';
 import { rotationService } from './rotation';
 
@@ -10,10 +11,17 @@ class DiscordChannelService {
     return channels.map((channel) => channel.channelId);
   };
 
+  public findByChannelId = async (
+    channelId: string
+  ): Promise<DiscordChannelRotation | undefined> => {
+    return mongoDiscordChannelRepository.findByChannelId(channelId);
+  };
+
   public findOrCreateChannelRotation = async (
     channelId: string,
     name: string,
     responsible: string[],
+    ownerId: string,
     startDate?: string,
     length = '7 days'
   ) => {
@@ -30,6 +38,7 @@ class DiscordChannelService {
         name,
         length,
         responsible,
+        ownerId,
       },
       startDate
     );
@@ -58,6 +67,20 @@ class DiscordChannelService {
     );
 
     return rotation.duty?.[0].userId;
+  };
+
+  public getRotation = async (channelId: string) => {
+    const channelRotation = await mongoDiscordChannelRepository.findByChannelId(
+      channelId
+    );
+
+    if (!channelRotation) {
+      return;
+    }
+
+    await rotationService.rotate(channelRotation?.rotationId);
+
+    return await rotationService.findById(channelRotation?.rotationId);
   };
 }
 

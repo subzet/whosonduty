@@ -16,17 +16,19 @@ export class RotationDuty {
 
 export class Rotation extends MongoBase {
   @prop()
-  name!: string; // Backend Support;
+  name!: string;
 
   @prop()
-  length!: string; // 7 days;
+  length!: string;
 
   @prop()
-  responsible!: string[]; // [Manu, Ari, Marcos]
+  responsible!: string[];
 
   @prop()
   duty?: RotationDuty[];
-  // [Last RotationDuty, Current Rotation Duty , Next RotationDuty] o [Current Rotation Duty, Next Rotation Duty]
+
+  @prop()
+  ownerId!: string;
 }
 
 export const RotationModel = getModelForClass(Rotation);

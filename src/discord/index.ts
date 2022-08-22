@@ -2,9 +2,17 @@ import { Client, GatewayIntentBits, REST, Routes } from 'discord.js';
 
 import { environment } from '../util';
 import { allowedUser, ping, rotation } from './command';
-import { rotationMessageHandler } from './message';
+import {
+  incidentThreadSolutionMessageHandler,
+  rotationChannelSupportMessageHandler,
+} from './message';
 
 const commands = [ping, rotation, allowedUser];
+
+const messageHandler = [
+  rotationChannelSupportMessageHandler,
+  incidentThreadSolutionMessageHandler,
+];
 
 const rest = new REST({ version: '10' }).setToken(environment.DISCORD_TOKEN);
 
@@ -55,7 +63,7 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 client.on('messageCreate', async (message) => {
-  await rotationMessageHandler(message);
+  await Promise.all(messageHandler.map((handler) => handler(message)));
 });
 
 client.login(environment.DISCORD_TOKEN);

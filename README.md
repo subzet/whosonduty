@@ -24,3 +24,5 @@ answer it.
 `/delete-rotation` deletes channel rotation.
 
 `/add-users` will define which users are allowed to answers questions in the channel.
+
+`/skip-current` skip current responsible and continue to the next in line.
